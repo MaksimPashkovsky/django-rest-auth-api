@@ -23,6 +23,7 @@ class RegisterAPIView(APIView):
     def post(self, request):
         serializer = UserInSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+
         try:
             user = serializer.save()
         except serializers.ValidationError:
@@ -69,6 +70,7 @@ class RefreshAPIView(APIView):
     def post(self, request):
         serializer = RefreshTokenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+
         refresh_token = serializer.data['refresh_token']
 
         try:

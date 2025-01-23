@@ -14,7 +14,9 @@ class EmailAuthentication(BaseAuthentication):
     def authenticate(self, request):
 
         serializer = UserInSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+
+        if not serializer.is_valid():
+            return None
 
         try:
             password = serializer.data['password']
